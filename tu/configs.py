@@ -23,6 +23,7 @@ by vitchyr
 import math
 import sys
 import collections
+import collections.abc
 import itertools
 
 
@@ -105,7 +106,7 @@ def nested_dict_to_dot_map_dict(d, parent_key=''):
     items = []
     for k, v in d.items():
         new_key = parent_key + "." + k if parent_key else k
-        if isinstance(v, collections.MutableMapping):
+        if isinstance(v, collections.abc.MutableMapping):
             items.extend(nested_dict_to_dot_map_dict(v, new_key).items())
         else:
             items.append((new_key, v))

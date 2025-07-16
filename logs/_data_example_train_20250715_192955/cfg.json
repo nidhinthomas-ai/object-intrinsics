@@ -1,0 +1,274 @@
+{
+    "_ENV_VARS_": {
+        "DEBUG": 0
+    },
+    "data": {
+        "__target__": "src.datasets.eval_dataset.Dataset",
+        "kwargs": {
+            "dataset_folder": "data/example",
+            "resolution": 128
+        }
+    },
+    "data_info": {
+        "cam_dist": 11.430052302761343,
+        "cam_loc": null,
+        "fov": 10,
+        "light_loc": null,
+        "pose_prior": {
+            "__target__": "src.utils.pose_sampler.Plane",
+            "kwargs": {
+                "cam_loc": [
+                    0,
+                    -1,
+                    0
+                ],
+                "rot_degree_range_scale": 360,
+                "rot_roll_degree_range_scale": 20,
+                "xy_range_scale": [
+                    6,
+                    3.5
+                ]
+            }
+        },
+        "scene_fov": 56.97764364679225
+    },
+    "dataset": "data/example",
+    "log_dir": "logs/_data_example_train_20250715_192955",
+    "model": {
+        "discriminator": {
+            "__target__": "src.models.discriminator.ADADiscriminatorView",
+            "kwargs": {
+                "aug": {
+                    "__target__": "src.third_party.ada.augment.AugmentPipe",
+                    "kwargs": {
+                        "scale": 1,
+                        "xint": 1
+                    }
+                },
+                "aug_p": 1,
+                "img_size": 128,
+                "in_dim": 3,
+                "last_bias": false,
+                "n_feat": 512,
+                "out_dim": 7,
+                "out_dim_latent": 0,
+                "out_dim_position": 6
+            }
+        },
+        "generator": {
+            "__target__": "src.models.generator.Generator",
+            "kwargs": {
+                "anneal_end": 50000,
+                "camera": {
+                    "__target__": "src.models.camera_network.Camera",
+                    "kwargs": {
+                        "cam_dist": 11.430052302761343,
+                        "fov": 56.97764364679225,
+                        "resolution": 794
+                    }
+                },
+                "color_network": {
+                    "__target__": "src.models.fields.ColorNetwork",
+                    "kwargs": {
+                        "D": 8,
+                        "W": 128,
+                        "input_ch": 3,
+                        "input_ch_views": 3,
+                        "style_dim": 64
+                    }
+                },
+                "deviation_network": {
+                    "__target__": "src.third_party.neus.models.fields.SingleVarianceNetwork",
+                    "kwargs": {
+                        "init_val": 0.3
+                    }
+                },
+                "light_network": {
+                    "__target__": "src.utils.prior.build_directional_light_optimizable",
+                    "kwargs": {
+                        "ambient_color": 0.33,
+                        "cam_loc": null,
+                        "diffuse_color": 0.66,
+                        "light_loc": null,
+                        "shininess": 10,
+                        "specular_color": 0
+                    }
+                },
+                "pose_prior": {
+                    "__target__": "src.utils.pose_sampler.Plane",
+                    "kwargs": {
+                        "cam_loc": [
+                            0,
+                            -1,
+                            0
+                        ],
+                        "rot_degree_range_scale": 360,
+                        "rot_roll_degree_range_scale": 20,
+                        "xy_range_scale": [
+                            6,
+                            3.5
+                        ]
+                    }
+                },
+                "renderer": {
+                    "__target__": "src.third_party.neus.models.renderer.NeuSRenderer",
+                    "kwargs": {
+                        "n_importance": 4,
+                        "n_outside": 0,
+                        "n_samples": 16,
+                        "perturb": 1,
+                        "up_sample_steps": 1
+                    }
+                },
+                "resolution": 128,
+                "scene_resolution": 794,
+                "sdf_network": {
+                    "__target__": "src.models.fields.ShapeNetwork",
+                    "kwargs": {
+                        "D": 8,
+                        "W": 128,
+                        "checkpoint_path": "./checkpoints/sphere_init.pt",
+                        "input_ch": 3,
+                        "input_ch_views": 3,
+                        "style_dim": 64
+                    }
+                },
+                "z_dim": 64
+            }
+        },
+        "mask_discriminator": {
+            "__target__": "src.models.discriminator.ADADiscriminator",
+            "kwargs": {
+                "aug": {
+                    "__target__": "src.third_party.ada.augment.AugmentPipe",
+                    "kwargs": {
+                        "scale": 1,
+                        "xint": 1
+                    }
+                },
+                "aug_p": 1,
+                "img_size": 128,
+                "in_dim": 1,
+                "last_bias": false,
+                "n_feat": 512,
+                "out_dim": 1
+            }
+        }
+    },
+    "resolution": 128,
+    "runtime": {
+        "args": {
+            "config": "train",
+            "dataset": "data/example",
+            "log_unique": true,
+            "opts": [],
+            "overwrite": false,
+            "seed": 0,
+            "tag": null
+        },
+        "argv": [
+            "scripts/train.py",
+            "-d",
+            "data/example",
+            "--log-unique"
+        ],
+        "slurm_job_id": "2504952",
+        "slurm_job_name": "objint"
+    },
+    "scene_resolution": 794,
+    "trainer": {
+        "__target__": "src.trainers.gan_pose_trainer.Trainer",
+        "kwargs": {
+            "loss_modules": {
+                "aux_pose": {
+                    "__target__": "src.loss.position.PositionLoss",
+                    "kwargs": {
+                        "loss_str": "mse"
+                    }
+                },
+                "gan": {
+                    "__target__": "src.loss.gan.GANLoss",
+                    "kwargs": {
+                        "gan_str": "bce"
+                    }
+                },
+                "reg": "src.loss.gan.compute_grad2"
+            },
+            "loss_weight": {
+                "aux_pose": {
+                    "__target__": "src.loss.position.linear_increase",
+                    "kwargs": {
+                        "max_it": 1000,
+                        "max_weight": 1
+                    }
+                },
+                "disc_in_gen": 1,
+                "eikonal": 10,
+                "mask_disc_in_gen": 0.1,
+                "reg": 10
+            }
+        }
+    },
+    "training": {
+        "batch_size": 1,
+        "checkpoint_dir": null,
+        "opt_discriminator": {
+            "__target__": "torch.optim.RMSprop",
+            "kwargs": {
+                "lr": 0.0001
+            }
+        },
+        "opt_generator": {
+            "__target__": "torch.optim.Adam",
+            "kwargs": {
+                "betas": [
+                    0,
+                    0.9
+                ],
+                "lr": 2e-05
+            }
+        },
+        "opt_mask_discriminator": {
+            "__target__": "torch.optim.RMSprop",
+            "kwargs": {
+                "lr": 0.0001
+            }
+        },
+        "sch_discriminator": {
+            "__target__": "torch.optim.lr_scheduler.StepLR",
+            "kwargs": {
+                "gamma": 1,
+                "last_epoch": -1,
+                "step_size": 10000
+            }
+        },
+        "sch_generator": {
+            "__target__": "torch.optim.lr_scheduler.StepLR",
+            "kwargs": {
+                "gamma": 1,
+                "last_epoch": -1,
+                "step_size": 10000
+            }
+        },
+        "sch_mask_discriminator": {
+            "__target__": "torch.optim.lr_scheduler.StepLR",
+            "kwargs": {
+                "gamma": 1,
+                "last_epoch": -1,
+                "step_size": 10000
+            }
+        },
+        "train_loops_fn": {
+            "__target__": "src.trainers.gan_pose_trainer.train_loops",
+            "kwargs": {
+                "checkpoint_every": 10000,
+                "checkpoint_overwrite": false,
+                "eval_every": 1000,
+                "max_epoch": null,
+                "max_it": 100000,
+                "print_every": 1000,
+                "visualize_every": 1000
+            }
+        }
+    }
+}

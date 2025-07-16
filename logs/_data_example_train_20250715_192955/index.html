@@ -1,0 +1,397 @@
+<html>
+<head>
+<title>It 10000</title>
+<style>
+td {vertical-align:top;padding:5px}
+</style>
+</head>
+<body>
+<h1>It 10000</h1>
+
+<script
+    src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+    crossorigin="anonymous"
+></script>
+<script>
+function frameMove(elem, offset) {
+    elem = $(elem);
+    window.elem = elem;
+    data = JSON.parse(elem.parent().find(".data").html());
+    index = parseInt(elem.parent().find(".index").val());
+
+    nextIndex = index + offset;
+    if (nextIndex < 0) nextIndex = 0;
+    if (nextIndex >= data.length) nextIndex = data.length - 1;
+
+    elem.parent().find(".index").val(nextIndex);
+    if ("image" in data[nextIndex]) {
+        elem.parent().find(".image").attr("src", data[nextIndex]["image"][0]).attr("alt", data[nextIndex]["image"][1]);
+    } else {
+        elem.parent().find(".text").html(data[nextIndex]["text"]);
+    }
+
+    if ("info" in data[nextIndex]) {
+        elem.parent().find(".info").html("Frame #" + nextIndex.toString() + " :: " + data[nextIndex]["info"]);
+    } else {
+        elem.parent().find(".info").html("Frame #" + nextIndex.toString());
+    }
+}
+</script>
+    
+<style>
+.table170_column_row {  }
+.table170_td_row {  }
+.table170_column_c00 {  }
+.table170_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/image</pre></td>
+</tr>
+<tr>
+  <td class="table170_td_row">
+    <pre class="table170_column_row">r00</pre>
+  </td>
+  <td class="table170_td_c00">
+    <img class="table170_column_c00" src="assets/table170/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table171_column_row {  }
+.table171_td_row {  }
+.table171_column_c00 {  }
+.table171_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/mask</pre></td>
+</tr>
+<tr>
+  <td class="table171_td_row">
+    <pre class="table171_column_row">r00</pre>
+  </td>
+  <td class="table171_td_c00">
+    <img class="table171_column_c00" src="assets/table171/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table172_column_row {  }
+.table172_td_row {  }
+.table172_column_c00 {  }
+.table172_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/color_map</pre></td>
+</tr>
+<tr>
+  <td class="table172_td_row">
+    <pre class="table172_column_row">r00</pre>
+  </td>
+  <td class="table172_td_c00">
+    <img class="table172_column_c00" src="assets/table172/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table173_column_row {  }
+.table173_td_row {  }
+.table173_column_c00 {  }
+.table173_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/specular_map</pre></td>
+</tr>
+<tr>
+  <td class="table173_td_row">
+    <pre class="table173_column_row">r00</pre>
+  </td>
+  <td class="table173_td_c00">
+    <img class="table173_column_c00" src="assets/table173/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table174_column_row {  }
+.table174_td_row {  }
+.table174_column_c00 {  }
+.table174_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/no_specular_map</pre></td>
+</tr>
+<tr>
+  <td class="table174_td_row">
+    <pre class="table174_column_row">r00</pre>
+  </td>
+  <td class="table174_td_c00">
+    <img class="table174_column_c00" src="assets/table174/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table175_column_row {  }
+.table175_td_row {  }
+.table175_column_c00 {  }
+.table175_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/shading_map</pre></td>
+</tr>
+<tr>
+  <td class="table175_td_row">
+    <pre class="table175_column_row">r00</pre>
+  </td>
+  <td class="table175_td_c00">
+    <img class="table175_column_c00" src="assets/table175/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table176_column_row {  }
+.table176_td_row {  }
+.table176_column_c00 {  }
+.table176_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/diff_shading_map</pre></td>
+</tr>
+<tr>
+  <td class="table176_td_row">
+    <pre class="table176_column_row">r00</pre>
+  </td>
+  <td class="table176_td_c00">
+    <img class="table176_column_c00" src="assets/table176/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table177_column_row {  }
+.table177_td_row {  }
+.table177_column_c00 {  }
+.table177_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/amb_shading_map</pre></td>
+</tr>
+<tr>
+  <td class="table177_td_row">
+    <pre class="table177_column_row">r00</pre>
+  </td>
+  <td class="table177_td_c00">
+    <img class="table177_column_c00" src="assets/table177/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table178_column_row {  }
+.table178_td_row {  }
+.table178_column_c00 {  }
+.table178_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/normal_map</pre></td>
+</tr>
+<tr>
+  <td class="table178_td_row">
+    <pre class="table178_column_row">r00</pre>
+  </td>
+  <td class="table178_td_c00">
+    <img class="table178_column_c00" src="assets/table178/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table179_column_row {  }
+.table179_td_row {  }
+.table179_column_c00 {  }
+.table179_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/diff_shading_map</pre></td>
+</tr>
+<tr>
+  <td class="table179_td_row">
+    <pre class="table179_column_row">r00</pre>
+  </td>
+  <td class="table179_td_c00">
+    <img class="table179_column_c00" src="assets/table179/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table180_column_row {  }
+.table180_td_row {  }
+.table180_column_c00 {  }
+.table180_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/amb_shading_map</pre></td>
+</tr>
+<tr>
+  <td class="table180_td_row">
+    <pre class="table180_column_row">r00</pre>
+  </td>
+  <td class="table180_td_c00">
+    <img class="table180_column_c00" src="assets/table180/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table181_column_row {  }
+.table181_td_row {  }
+.table181_column_c00 {  }
+.table181_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/z</pre></td>
+</tr>
+<tr>
+  <td class="table181_td_row">
+    <pre class="table181_column_row">r00</pre>
+  </td>
+  <td class="table181_td_c00">
+    <img class="table181_column_c00" src="assets/table181/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table182_column_row {  }
+.table182_td_row {  }
+.table182_column_c00 {  }
+.table182_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/light</pre></td>
+</tr>
+<tr>
+  <td class="table182_td_row">
+    <pre class="table182_column_row">r00</pre>
+  </td>
+  <td class="table182_td_c00">
+    <img class="table182_column_c00" src="assets/table182/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table183_column_row {  }
+.table183_td_row {  }
+.table183_column_c00 {  }
+.table183_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >fake/image_aug</pre></td>
+</tr>
+<tr>
+  <td class="table183_td_row">
+    <pre class="table183_column_row">r00</pre>
+  </td>
+  <td class="table183_td_c00">
+    <img class="table183_column_c00" src="assets/table183/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table184_column_row {  }
+.table184_td_row {  }
+.table184_column_c00 {  }
+.table184_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >real/image</pre></td>
+</tr>
+<tr>
+  <td class="table184_td_row">
+    <pre class="table184_column_row">r00</pre>
+  </td>
+  <td class="table184_td_c00">
+    <img class="table184_column_c00" src="assets/table184/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table185_column_row {  }
+.table185_td_row {  }
+.table185_column_c00 {  }
+.table185_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >real/mask</pre></td>
+</tr>
+<tr>
+  <td class="table185_td_row">
+    <pre class="table185_column_row">r00</pre>
+  </td>
+  <td class="table185_td_c00">
+    <img class="table185_column_c00" src="assets/table185/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>
+</table>
+<style>
+.table186_column_row {  }
+.table186_td_row {  }
+.table186_column_c00 {  }
+.table186_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >real/image_aug</pre></td>
+</tr>
+<tr>
+  <td class="table186_td_row">
+    <pre class="table186_column_row">r00</pre>
+  </td>
+  <td class="table186_td_c00">
+    <img class="table186_column_c00" src="assets/table186/row000000_c00.png" alt="row000000_c00.png" />
+  </td>
+</tr>

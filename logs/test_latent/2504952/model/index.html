@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>default</title>
+<style>
+td {vertical-align:top;padding:5px}
+</style>
+</head>
+<body>
+<h1>default</h1>
+
+<script
+    src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+    crossorigin="anonymous"
+></script>
+<script>
+function frameMove(elem, offset) {
+    elem = $(elem);
+    window.elem = elem;
+    data = JSON.parse(elem.parent().find(".data").html());
+    index = parseInt(elem.parent().find(".index").val());
+
+    nextIndex = index + offset;
+    if (nextIndex < 0) nextIndex = 0;
+    if (nextIndex >= data.length) nextIndex = data.length - 1;
+
+    elem.parent().find(".index").val(nextIndex);
+    if ("image" in data[nextIndex]) {
+        elem.parent().find(".image").attr("src", data[nextIndex]["image"][0]).attr("alt", data[nextIndex]["image"][1]);
+    } else {
+        elem.parent().find(".text").html(data[nextIndex]["text"]);
+    }
+
+    if ("info" in data[nextIndex]) {
+        elem.parent().find(".info").html("Frame #" + nextIndex.toString() + " :: " + data[nextIndex]["info"]);
+    } else {
+        elem.parent().find(".info").html("Frame #" + nextIndex.toString());
+    }
+}
+</script>
+    
+<style>
+.table0_column_row {  }
+.table0_td_row {  }
+.table0_column_c00 {  }
+.table0_td_c00 {  }
+.table0_column_c01 {  }
+.table0_td_c01 {  }
+.table0_column_c02 {  }
+.table0_td_c02 {  }
+</style>
+<h3>generator</h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >image</pre></td>
+    <td><pre >normal</pre></td>
+    <td><pre >shading</pre></td>
+</tr>
+<tr>
+  <td class="table0_td_row">
+    <pre class="table0_column_row">r00</pre>
+  </td>
+  <td class="table0_td_c00">
+<video class=table0_column_c00 autoplay loop controls><source src="assets/table0/row000000_c00.mp4" type="video/mp4"></video>
+  </td>
+  <td class="table0_td_c01">
+<video class=table0_column_c01 autoplay loop controls><source src="assets/table0/row000000_c01.mp4" type="video/mp4"></video>
+  </td>
+  <td class="table0_td_c02">
+<video class=table0_column_c02 autoplay loop controls><source src="assets/table0/row000000_c02.mp4" type="video/mp4"></video>
+  </td>
+</tr>
+</table>
+<style>
+.table1_column_row {  }
+.table1_td_row {  }
+.table1_column_c00 {  }
+.table1_td_c00 {  }
+</style>
+<h3></h3>
+<table>
+<tr>
+    <td><pre >row</pre></td>
+    <td><pre >c00</pre></td>
+</tr>
+<tr>
+  <td class="table1_td_row">
+    <pre class="table1_column_row">r00</pre>
+  </td>
+  <td class="table1_td_c00">
+    <pre class="table1_column_c00">file:////scratch/10785/nidhinthomas/projects/cryoEM/object-intrinsics/logs/_data_example_train_20250715_192955</pre>
+  </td>
+</tr>
+<tr>
+  <td class="table1_td_row">
+    <pre class="table1_column_row">r01</pre>
+  </td>
+  <td class="table1_td_c00">
+    <pre class="table1_column_c00">2504952</pre>
+  </td>
+</tr>
+<tr>
+  <td class="table1_td_row">
+    <pre class="table1_column_row">r02</pre>
+  </td>
+  <td class="table1_td_c00">
+    <pre class="table1_column_c00">epoch 357, it 10000, logs/_data_example_train_20250715_192955/checkpoints/model.pt</pre>
+  </td>
+</tr>
+</table>

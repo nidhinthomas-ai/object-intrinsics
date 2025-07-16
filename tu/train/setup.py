@@ -64,9 +64,6 @@ def get_cfg(args, overwrite_fn_before_resolve=None):
     if len(args.opts) > 0:
         assert args.tag is not None, f"specify tag for {args.opts}"
     log_dir = get_log_dir(cfg, args)
-    if os.path.exists(log_dir) and not args.overwrite:
-        logger.error(f'{log_dir} exists')
-        exit(1)
     overwrite_cfg(cfg, 'log_dir', log_dir)
     
     if overwrite_fn_before_resolve is not None:
@@ -79,7 +76,7 @@ def get_cfg(args, overwrite_fn_before_resolve=None):
     if dist.is_initialized() and dist.get_rank() != 0:
         return cfg
 
-    os.makedirs(log_dir, exist_ok=args.overwrite)
+    os.makedirs(log_dir, exist_ok=True)
     update_cfg_slurm(cfg, log_dir)
     overwrite_cfg(cfg['runtime'], 'args', vars(args), check_exists=False)
     overwrite_cfg(cfg['runtime'], 'argv', sys.argv, check_exists=False)

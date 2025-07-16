@@ -1,0 +1,9 @@
+{
+    "config": "train",
+    "dataset": "data/example",
+    "log_unique": true,
+    "opts": [],
+    "overwrite": false,
+    "seed": 0,
+    "tag": null
+}

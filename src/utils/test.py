@@ -79,7 +79,12 @@ def update_legacy_state_dict(model, state_dict):
 
 def load_state_dict(model, state_dict, strict=True):
     generator = model.generator
-    checkpoint_io = CheckpointIO('/viscam/u/yzzhang/tmp', generator=generator)
+    # checkpoint_io = CheckpointIO('/viscam/u/yzzhang/tmp', generator=generator)
+    checkpoint_io = CheckpointIO(
+        '/scratch/10785/nidhinthomas/projects/cryoEM/object-intrinsics'
+        '/logs/_data_example_train_20250715_192955/checkpoints',
+        generator=model.generator
+    )
     load_dict = checkpoint_io.load(state_dict, strict=strict)
     logger.info(f"epoch {load_dict['epoch']}, it {load_dict['it']}")
     return load_dict

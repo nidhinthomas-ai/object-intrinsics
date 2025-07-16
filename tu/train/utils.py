@@ -28,7 +28,9 @@ def overwrite_cfg_from_dotlist(cfg, opts, write_env_vars=True):
 def update_cfg_slurm(cfg, log_dir):
     slurm_job_id = os.environ.get('SLURM_JOB_ID')
     slurm_job_name = os.environ.get('SLURM_JOB_NAME')
-    job_info_dir = 'experiments/slurm_id_to_out_dir'
+    job_info_dir   = 'experiments/slurm_id_to_out_dir'
+    os.makedirs(job_info_dir, exist_ok=True)
+
     if slurm_job_id is not None:
         job_info_path = os.path.join(job_info_dir, f'{slurm_job_id}.json')
         if os.path.exists(job_info_path):

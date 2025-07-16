@@ -4,3 +4,6 @@ data
 *__pycache__*
 scripts/exp/train.sh
 objint.egg-info
+
+logs/_data_example_train_20250715_192955/checkpoints/it_00000000.pt
+logs/_data_example_train_20250715_192955/checkpoints/it_00010000.pt
