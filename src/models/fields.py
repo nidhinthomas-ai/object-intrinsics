@@ -101,6 +101,59 @@ class ColorNetwork(nn.Module):
         return rgb
 
 
+class DensityNetwork(nn.Module):
+    """Simple MLP that outputs density values for cryo-EM volume rendering."""
+
+    def __init__(self, checkpoint_path=None, **kwargs):
+        super().__init__()
+
+        layers = []
+        for _ in range(3):
+            layers.append(
+                MappingLinear(kwargs['style_dim'], kwargs['style_dim'], activation="fused_lrelu")
+            )
+        self.style = nn.Sequential(*layers)
+        network = SirenGenerator(**kwargs)
+        self.pts_linears = network.pts_linears
+        self.density_linear = network.sigma_linear
+
+        if checkpoint_path is not None:
+            if dist.is_initialized():
+                device = f"cuda:{dist.get_rank()}"
+                self.to(device)
+            else:
+                device = "cuda"
+            state_dict = torch.load(checkpoint_path, map_location=device)
+            check_cfg_consistency(
+                kwargs,
+                state_dict['cfg']['model']['generator']['kwargs']['sdf_network']['kwargs'],
+                ignore_keys=['checkpoint_path'],
+            )
+            # Load weights into matching attributes
+            self.load_state_dict({k.replace('sigma_linear', 'density_linear'): v for k, v in state_dict['sdf_network'].items()})
+
+    def forward(self, x, z, w=None):
+        ray_bs = x.shape[0]
+        if w is not None:
+            bs = w.shape[0]
+        else:
+            bs = z.shape[0]
+        x = x.reshape(bs, ray_bs // bs, 1, 1, *x.shape[1:])
+
+        latent = self.style(z) if w is None else w
+
+        mlp_out = x.contiguous()
+        for layer in self.pts_linears:
+            mlp_out = layer(mlp_out, latent)
+
+        density = self.density_linear(mlp_out)
+        outputs = torch.cat([density, mlp_out], -1)
+        return outputs.flatten(0, 3)
+
+    def density(self, x, z, w=None):
+        return self.forward(x, z=z, w=w)[:, :1]
+
+
 def gradient(x, fn, second_order=False, laplacian=False):
     has_grad_outer = torch.is_grad_enabled()
     x.requires_grad_(True)
